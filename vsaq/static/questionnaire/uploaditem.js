@@ -163,7 +163,7 @@ vsaq.questionnaire.items.UploadItem.TYPE = 'upload';
 /**
  * A URL from where to get the upload URL.
  */
-vsaq.questionnaire.items.UploadItem.FETCH_URL_URL = '/ajax?f=GetUploadUrl';
+vsaq.questionnaire.items.UploadItem.FETCH_URL_URL = '/uploadfile';
 
 
 /**
@@ -180,7 +180,7 @@ vsaq.questionnaire.items.UploadItem.VALID_EXTENSIONS =
 vsaq.questionnaire.items.UploadItem.prototype.handleUpload_ = function() {
   var file = this.fileInput_.value;
   if (!file) return;
-
+  console.log("file upload 1");
   var ext = file.substring(file.lastIndexOf('.') + 1).toLowerCase();
   if (!goog.array.contains(
       vsaq.questionnaire.items.UploadItem.VALID_EXTENSIONS, ext)) {
@@ -197,6 +197,7 @@ vsaq.questionnaire.items.UploadItem.prototype.handleUpload_ = function() {
           var io = new goog.net.IframeIo();
           goog.events.listen(io, [goog.net.EventType.COMPLETE],
               this.handleCompletedUpload_, true, this);
+          console.log(this.form_);
           io.sendFromForm(this.form_);
           goog.dom.setTextContent(this.label_, 'Uploading...');
           goog.style.setElementShown(this.fileInput_, false);
@@ -213,9 +214,10 @@ vsaq.questionnaire.items.UploadItem.prototype.handleUpload_ = function() {
 vsaq.questionnaire.items.UploadItem.prototype.handleCompletedUpload_ =
     function(e) {
   var response = {};
-  try {
+      console.log('nwringireng');
     response = e.target.getResponseJson();
-  } catch (err) {}
+    console.log(response);
+
   if (response['filename'] && response['fileId']) {
     this.setValue(response['fileId'] + '|' + response['filename']);
   } else {

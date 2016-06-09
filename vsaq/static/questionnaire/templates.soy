@@ -113,6 +113,7 @@
                 $knownPropertiesValues[$knownPropertyIndex].value}
               <span name="{$knownPropertiesValues[$knownPropertyIndex].nameInClass}" class="vsaq-remove-text">
                 <input type="checkbox" checked="checked" class="vsaq-checkbox">
+
               </span>
             {else}
               {call .editablePropertyValue}
@@ -147,8 +148,16 @@
     &nbsp;
     {if $defaultType!='block' and $defaultType!='radiogroup' and $defaultType!='checkgroup'}
       <a class="maia-button eh-copy-item">Copy</a>
+      <a class="maia-button eh-copy-item">Copy</a>
+      <a class="maia-button eh-copy-item">Copy</a>
+      <a class="maia-button eh-copy-item">Copy</a>
+      <a class="maia-button eh-copy-item">Copy</a>
       &nbsp;
     {/if}
+    <a class="maia-button eh-remove-from-item">Remove</a>
+    <a class="maia-button eh-remove-from-item">Remove</a>
+    <a class="maia-button eh-remove-from-item">Remove</a>
+    <a class="maia-button eh-remove-from-item">Remove</a>
     <a class="maia-button eh-remove-from-item">Remove</a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a class="maia-button eh-move-item-up">&#x25B2;</a>
@@ -194,10 +203,17 @@
  */
 {template .yesno}
   <div class="vsaq-item vsaq-yesno-block" data-vsaq-container-for="{$id}">
+<div class="questions" question-for="{$id}">
     <div class="vsaq-question-title">
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </div>
     <label>
+
+    <div class="checkboxFour">
+          <label>
+            <input type="checkbox" value="1" class="helpcheck" />
+         </label>
+    </div>
       <input name="{$id}" id="{$id}/yes" type="radio" value="yes"
         class="vsaq-radiobutton">{sp}
       <span name="yes" class="vsaq-label-text">{$yesHtml}</span>
@@ -208,6 +224,7 @@
       <span name="no" class="vsaq-label-text">{$noHtml}</span>
     </label>
   </div>
+</div>
 {/template}
 
 
@@ -217,11 +234,21 @@
  * @param captionHtml {SanitizedContent} The caption of the question.
  */
 {template .groupitem}
+<div class="questions" question-for={$id}>
   <div id="{$id}" class="vsaq-item vsaq-group-item">
+
     <div class="vsaq-question-title">
+
+    <div class="checkboxFour">
+          <label>
+            <input type="checkbox" value="1" class="helpcheck" />
+         </label>
+
+    </div>
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </div>
   </div>
+</div>
 {/template}
 
 
@@ -255,6 +282,7 @@
   <div id="{$id}" class="vsaq-item">
     <hr class="vsaq-spacer" />
   </div>
+  </div>
 {/template}
 
 
@@ -266,7 +294,9 @@
 {template .check}
   <div class="vsaq-item vsaq-checkbox-item" data-vsaq-container-for="{$id}">
     <label>
+
       <input type="checkbox" name="{$id}" id="{$id}" class="vsaq-checkbox">{sp}
+
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </label>
   </div>
@@ -324,11 +354,17 @@
  */
 {template .box}
   <div class="vsaq-item" data-vsaq-container-for="{$id}">
+<div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
       <label name="text" class="vsaq-label-text" for="{$id}">
         {$captionHtml}
       </label>
-    </div>
+
+      <div class="checkboxFour">
+            <label>
+              <input type="checkbox" value="1" class="helpcheck" />
+           </label>
+      </div>
     <textarea id="{$id}"
       {if $placeholder}placeholder="{$placeholder}" {/if}
       {if $inputPattern}pattern="{$inputPattern}" {/if}
@@ -336,6 +372,7 @@
       {if $isRequired}required {/if}
       class="vsaq-box"></textarea>
   </div>
+</div>
 {/template}
 
 
@@ -351,10 +388,17 @@
  */
 {template .line}
   <div class="vsaq-item" data-vsaq-container-for="{$id}">
+<div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
       <label name="text" class="vsaq-label-text" for="{$id}">
         {$captionHtml}
       </label>
+    </div>
+
+    <div class="checkboxFour">
+          <label>
+            <input type="checkbox" value="1" class="helpcheck" />
+         </label>
     </div>
     <input id="{$id}"
       {if $placeholder}placeholder="{$placeholder}" {/if}
@@ -365,24 +409,33 @@
       class="vsaq-line">
     <p></p>
   </div>
+</div>
 {/template}
 
 
 /**
  * Shows a question with a caption and file upload field.
  * @param id {string} The id of the item.
+ * @param text {string} The id of the item.
  * @param captionHtml {SanitizedContent} A caption to be shown above the input field.
  */
 {template .upload}
-  <div class="vsaq-item" data-vsaq-container-for="{$id}">
+  <div class="vsaq-item filechecker" txt="{$text}" data-vsaq-container-for="{$id}">
     <div class="vsaq-question-title">
       <label name="text" class="vsaq-label-text" for="{$id}-file">
         {$captionHtml}
       </label>
     </div>
-    <div class="vsaq-question-title">The following file types are allowed: PDF, ODT, DOC, DOCX</div>
+</div>
+    <div class="vsaq-question-title">The following file types are allowed: PDF, ODT, DOC, DOCX, rwbubqrug</div>
     <form enctype="multipart/form-data" method="POST" id="{$id}-form">
       <span id="{$id}-label"></span>{sp}
+
+      <div class="filecheck">
+            <label>
+              <input type="text" class="filecheckx" />
+           </label>
+      </div>
       <input type="file" name="file" class="vsaq-upload" id="{$id}-file">
       {sp}<a href="javascript:void(0)" id="{$id}-download">Download</a>
       {sp}<a href="javascript:void(0)" id="{$id}-delete">Delete</a>
@@ -404,6 +457,8 @@
       <p>Based on your selections, we have compiled the following todo list
       for you:</p>
       <ul id='vsaq_todo_ul'>
+
+
       {foreach $todo in $todoListItems}
         <li><label><input type='checkbox' name='{$todo.key}'
                           class='eh-todo-item'
@@ -411,6 +466,7 @@
                           id='{$todo.key}'
                           value='checked'>
           <span>{$todo.description}</span></label></li>
+
       {/foreach}
       </ul>
     {else}
