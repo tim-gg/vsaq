@@ -133,8 +133,10 @@ vsaq.questionnaire.items.UploadItem.prototype.render = function() {
   goog.events.listen(
       this.downloadLink_, goog.events.EventType.CLICK,
       function(e) {
+          var filename = this.filename_.replace(/\s+/g, '');
+          console.log(filename);
         e.target.href = goog.string.format('/download/%s?q=%s', this.fileId_,
-            encodeURIComponent(document.location.pathname));
+            filename);
       }, true, this);
   goog.events.listen(
       this.deleteLink_, goog.events.EventType.CLICK,
@@ -197,7 +199,6 @@ vsaq.questionnaire.items.UploadItem.prototype.handleUpload_ = function() {
           var io = new goog.net.IframeIo();
           goog.events.listen(io, [goog.net.EventType.COMPLETE],
               this.handleCompletedUpload_, true, this);
-          console.log(this.form_);
           io.sendFromForm(this.form_);
           goog.dom.setTextContent(this.label_, 'Uploading...');
           goog.style.setElementShown(this.fileInput_, false);
@@ -214,10 +215,13 @@ vsaq.questionnaire.items.UploadItem.prototype.handleUpload_ = function() {
 vsaq.questionnaire.items.UploadItem.prototype.handleCompletedUpload_ =
     function(e) {
   var response = {};
-      console.log('nwringireng');
-    response = e.target.getResponseJson();
-    console.log(response);
+//              console.log('nwringireng');
+//    response = e.target.getResponseJson();
+//      console.log(response);
 
+  try {
+    response = e.target.getResponseJson();
+  } catch (err) {}
   if (response['filename'] && response['fileId']) {
     this.setValue(response['fileId'] + '|' + response['filename']);
   } else {
@@ -288,12 +292,12 @@ vsaq.questionnaire.items.UploadItem.prototype.setInternalValue =
     this.filename_ = parts[1];
 
     goog.dom.setTextContent(this.label_, 'Uploaded file: ' + this.filename_);
-    this.downloadLink_.href = goog.string.format('/download/%s?q=%s',
-        this.fileId_, encodeURIComponent(document.location.pathname));
+    this.downloadLink_.href = goog.string.format('/download/',
+        this.fileId_, this.filename_);
     goog.style.setElementShown(this.deleteLink_, true);
     goog.style.setElementShown(this.downloadLink_, true);
     goog.style.setElementShown(this.fileInput_, false);
-    this.form_.reset();
+    //this.form_.reset();
   } else if (!value) {
     this.deleteFile_();
   }

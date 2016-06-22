@@ -131,6 +131,8 @@ vsaq.questionnaire.items.Item = function(id, conditions) {
    * @type {vsaq.questionnaire.items.ContainerItem}
    */
   this.parentItem;
+    
+   // this.textid
 
   /**
    * The item's HTML Element.

@@ -203,9 +203,11 @@
  */
 {template .yesno}
   <div class="vsaq-item vsaq-yesno-block" data-vsaq-container-for="{$id}">
-<div class="questions" question-for="{$id}">
+<div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
+      <button type="button" class="check rejectioncommentbox" id="{$id}-rejectioncommentcheck"></button>
+      <button type="button" class="check findingcommentbox" id="{$id}-findingcommentcheck"></button>
     </div>
     <label>
 
@@ -214,6 +216,10 @@
             <input type="checkbox" value="1" class="helpcheck" />
          </label>
     </div>
+            <input id="{$id}-generalcommentid" type="text" class="consultantcomment generalcomment" />
+            <input id="{$id}-rejectioncommentid" type="text" class="consultantcomment rejectioncomment" />
+            <input id="{$id}-findingcommentid" type="text" class="consultantcomment findingcomment" />
+
       <input name="{$id}" id="{$id}/yes" type="radio" value="yes"
         class="vsaq-radiobutton">{sp}
       <span name="yes" class="vsaq-label-text">{$yesHtml}</span>
@@ -238,13 +244,42 @@
   <div id="{$id}" class="vsaq-item vsaq-group-item">
 
     <div class="vsaq-question-title">
-
     <div class="checkboxFour">
           <label>
             <input type="checkbox" value="1" class="helpcheck" />
          </label>
-
     </div>
+
+
+    <span class="w3-container">
+    <div class="w3-row">
+      <a onclick="openCommentTab(event);"  class="check">
+        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding reject-tab" id="{$id}-rejectioncommentcheck">Rejection</div>
+      </a>
+      <a onclick="openCommentTab(event);"  class="check">
+        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding override-tab" id="{$id}-findingcommentcheck">Override</div>
+      </a>
+      <a onclick="openCommentTab(event);" class="check">
+        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding comment-tab" id="{$id}-generalcommentcheck">General</div>
+      </a>
+    </div>
+
+    <div id="{$id}-rejectioncommentid" class="w3-container city">
+      <p>Rejection comment</p>
+    </div>
+
+    <div id="{$id}-findingcommentid" class="w3-container city">
+      <p>Override comment</p>
+    </div>
+
+    <div id="{$id}-generalcommentid" class="w3-container city">
+      <p>General comment</p>
+    </div>
+    </span>
+
+
+
+
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </div>
   </div>
@@ -356,6 +391,8 @@
   <div class="vsaq-item" data-vsaq-container-for="{$id}">
 <div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
+      <button type="button" class="check rejectioncommentbox" id="{$id}-rejectioncommentcheck"></button>
+      <button type="button" class="check findingcommentbox" id="{$id}-findingcommentcheck"></button>
       <label name="text" class="vsaq-label-text" for="{$id}">
         {$captionHtml}
       </label>
@@ -365,6 +402,9 @@
               <input type="checkbox" value="1" class="helpcheck" />
            </label>
       </div>
+            <input id="{$id}-generalcommentid" type="text" class="consultantcomment generalcomment" />
+            <input id="{$id}-rejectioncommentid" type="text" class="consultantcomment rejectioncomment" />
+            <input id="{$id}-findingcommentid" type="text" class="consultantcomment findingcomment" />
     <textarea id="{$id}"
       {if $placeholder}placeholder="{$placeholder}" {/if}
       {if $inputPattern}pattern="{$inputPattern}" {/if}
@@ -390,6 +430,8 @@
   <div class="vsaq-item" data-vsaq-container-for="{$id}">
 <div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
+      <button type="button" class="check rejectioncommentbox" id="{$id}-rejectioncommentcheck"></button>
+      <button type="button" class="check findingcommentbox" id="{$id}-findingcommentcheck"></button>
       <label name="text" class="vsaq-label-text" for="{$id}">
         {$captionHtml}
       </label>
@@ -400,6 +442,9 @@
             <input type="checkbox" value="1" class="helpcheck" />
          </label>
     </div>
+            <input id="{$id}-generalcommentid" type="text" class="consultantcomment generalcomment" />
+            <input id="{$id}-rejectioncommentid" type="text" class="consultantcomment rejectioncomment" />
+            <input id="{$id}-findingcommentid" type="text" class="consultantcomment findingcomment" />
     <input id="{$id}"
       {if $placeholder}placeholder="{$placeholder}" {/if}
       {if $isRequired}required {/if}
@@ -416,24 +461,23 @@
 /**
  * Shows a question with a caption and file upload field.
  * @param id {string} The id of the item.
- * @param text {string} The id of the item.
  * @param captionHtml {SanitizedContent} A caption to be shown above the input field.
  */
 {template .upload}
-  <div class="vsaq-item filechecker" txt="{$text}" data-vsaq-container-for="{$id}">
+  <div class="vsaq-item filechecker" data-vsaq-container-for="{$id}">
     <div class="vsaq-question-title">
-      <label name="text" class="vsaq-label-text" for="{$id}-file">
+      <label name="text" class="vsaq-label-text uploadtext" for="{$id}-file">
         {$captionHtml}
       </label>
     </div>
 </div>
-    <div class="vsaq-question-title">The following file types are allowed: PDF, ODT, DOC, DOCX, rwbubqrug</div>
+    <div class="vsaq-question-title">The following file types are allowed: PDF, ODT, DOC, DOCX</div>
     <form enctype="multipart/form-data" method="POST" id="{$id}-form">
       <span id="{$id}-label"></span>{sp}
 
       <div class="filecheck">
             <label>
-              <input type="text" class="filecheckx" />
+              <input type="text" id="{$id}-filetext" class="filecheckx" >
            </label>
       </div>
       <input type="file" name="file" class="vsaq-upload" id="{$id}-file">
