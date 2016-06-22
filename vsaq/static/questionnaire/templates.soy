@@ -206,8 +206,6 @@
 <div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
-      <button type="button" class="check rejectioncommentbox" id="{$id}-rejectioncommentcheck"></button>
-      <button type="button" class="check findingcommentbox" id="{$id}-findingcommentcheck"></button>
     </div>
     <label>
 
@@ -216,51 +214,27 @@
             <input type="checkbox" value="1" class="helpcheck" />
          </label>
     </div>
-            <input id="{$id}-generalcommentid" type="text" class="consultantcomment generalcomment" />
-            <input id="{$id}-rejectioncommentid" type="text" class="consultantcomment rejectioncomment" />
-            <input id="{$id}-findingcommentid" type="text" class="consultantcomment findingcomment" />
 
-      <input name="{$id}" id="{$id}/yes" type="radio" value="yes"
-        class="vsaq-radiobutton">{sp}
-      <span name="yes" class="vsaq-label-text">{$yesHtml}</span>
-    </label>
-    <label>
-      <input name="{$id}" id="{$id}/no" type="radio" value="no"
-        class="vsaq-radiobutton">{sp}
-      <span name="no" class="vsaq-label-text">{$noHtml}</span>
-    </label>
-  </div>
-</div>
-{/template}
+    <input name="{$id}" id="{$id}/yes" type="radio" value="yes"
+      class="vsaq-radiobutton">{sp}
+    <span name="yes" class="vsaq-label-text">{$yesHtml}</span>
+  </label>
+  <label>
+    <input name="{$id}" id="{$id}/no" type="radio" value="no"
+      class="vsaq-radiobutton">{sp}
+    <span name="no" class="vsaq-label-text">{$noHtml}</span>
+  </label>
 
-
-/**
- * A simple wrapper for group items.
- * @param id {string} The id of the group.
- * @param captionHtml {SanitizedContent} The caption of the question.
- */
-{template .groupitem}
-<div class="questions" question-for={$id}>
-  <div id="{$id}" class="vsaq-item vsaq-group-item">
-
-    <div class="vsaq-question-title">
-    <div class="checkboxFour">
-          <label>
-            <input type="checkbox" value="1" class="helpcheck" />
-         </label>
-    </div>
-
-
-    <span class="w3-container">
+    <div class="w3-container comment-wrapper">
     <div class="w3-row">
+    <a onclick="openCommentTab(event);" class="check">
+      <div class="tablink w3-bottombar w3-hover-light-grey w3-padding comment-tab w3-border-green" id="{$id}-generalcommentcheck">General</div>
+    </a>
       <a onclick="openCommentTab(event);"  class="check">
         <div class="tablink w3-bottombar w3-hover-light-grey w3-padding reject-tab" id="{$id}-rejectioncommentcheck">Rejection</div>
       </a>
       <a onclick="openCommentTab(event);"  class="check">
         <div class="tablink w3-bottombar w3-hover-light-grey w3-padding override-tab" id="{$id}-findingcommentcheck">Override</div>
-      </a>
-      <a onclick="openCommentTab(event);" class="check">
-        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding comment-tab" id="{$id}-generalcommentcheck">General</div>
       </a>
     </div>
 
@@ -275,13 +249,62 @@
     <div id="{$id}-generalcommentid" class="w3-container city">
       <p>General comment</p>
     </div>
-    </span>
-
-
-
-
-      <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </div>
+
+  </div>
+</div>
+{/template}
+
+
+/**
+ * A simple wrapper for group items.
+ * @param id {string} The id of the group.
+ * @param captionHtml {SanitizedContent} The caption of the question.
+ */
+{template .groupitem}
+<div class="questions" question-for={$id}>
+  <div id="{$id}" class="vsaq-item vsaq-group-item">
+
+  <div class="vsaq-question-title">
+    <label name="text" class="vsaq-label-text uploadtext" for="{$id}-file">
+      {$captionHtml}
+    </label>
+  </div>
+
+      <div class="checkboxFour">
+          <label>
+            <input type="checkbox" value="1" class="helpcheck" />
+         </label>
+    </div>
+
+    <span name="text" class="vsaq-label-text">{$captionHtml}</span>
+    </div>
+    <div class="w3-container comment-wrapper">
+    <div class="w3-row">
+    <a onclick="openCommentTab(event);" class="check">
+      <div class="tablink w3-bottombar w3-hover-light-grey w3-padding comment-tab w3-border-green" id="{$id}-generalcommentcheck">General</div>
+    </a>
+      <a onclick="openCommentTab(event);"  class="check">
+        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding reject-tab" id="{$id}-rejectioncommentcheck">Rejection</div>
+      </a>
+      <a onclick="openCommentTab(event);"  class="check">
+        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding override-tab" id="{$id}-findingcommentcheck">Override</div>
+      </a>
+    </div>
+
+    <div id="{$id}-rejectioncommentid" class="w3-container city">
+      <p>Rejection comment</p>
+    </div>
+
+    <div id="{$id}-findingcommentid" class="w3-container city">
+      <p>Override comment</p>
+    </div>
+
+    <div id="{$id}-generalcommentid" class="w3-container city">
+      <p>General comment</p>
+    </div>
+    </div>
+
   </div>
 </div>
 {/template}
@@ -391,26 +414,51 @@
   <div class="vsaq-item" data-vsaq-container-for="{$id}">
 <div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
-      <button type="button" class="check rejectioncommentbox" id="{$id}-rejectioncommentcheck"></button>
-      <button type="button" class="check findingcommentbox" id="{$id}-findingcommentcheck"></button>
       <label name="text" class="vsaq-label-text" for="{$id}">
         {$captionHtml}
       </label>
+      </div>
 
       <div class="checkboxFour">
             <label>
               <input type="checkbox" value="1" class="helpcheck" />
            </label>
       </div>
-            <input id="{$id}-generalcommentid" type="text" class="consultantcomment generalcomment" />
-            <input id="{$id}-rejectioncommentid" type="text" class="consultantcomment rejectioncomment" />
-            <input id="{$id}-findingcommentid" type="text" class="consultantcomment findingcomment" />
-    <textarea id="{$id}"
-      {if $placeholder}placeholder="{$placeholder}" {/if}
-      {if $inputPattern}pattern="{$inputPattern}" {/if}
-      {if $inputTitle}title="{$inputTitle}" {/if}
-      {if $isRequired}required {/if}
-      class="vsaq-box"></textarea>
+
+      <textarea id="{$id}"
+        {if $placeholder}placeholder="{$placeholder}" {/if}
+        {if $inputPattern}pattern="{$inputPattern}" {/if}
+        {if $inputTitle}title="{$inputTitle}" {/if}
+        {if $isRequired}required {/if}
+        class="vsaq-box">
+        </textarea>
+
+            <div class="w3-container comment-wrapper">
+            <div class="w3-row">
+            <a onclick="openCommentTab(event);" class="check">
+              <div class="tablink w3-bottombar w3-hover-light-grey w3-padding comment-tab w3-border-green" id="{$id}-generalcommentcheck">General</div>
+            </a>
+              <a onclick="openCommentTab(event);"  class="check">
+                <div class="tablink w3-bottombar w3-hover-light-grey w3-padding reject-tab" id="{$id}-rejectioncommentcheck">Rejection</div>
+              </a>
+              <a onclick="openCommentTab(event);"  class="check">
+                <div class="tablink w3-bottombar w3-hover-light-grey w3-padding override-tab" id="{$id}-findingcommentcheck">Override</div>
+              </a>
+            </div>
+
+            <div id="{$id}-rejectioncommentid" class="w3-container city">
+              <p>Rejection comment</p>
+            </div>
+
+            <div id="{$id}-findingcommentid" class="w3-container city">
+              <p>Override comment</p>
+            </div>
+
+            <div id="{$id}-generalcommentid" class="w3-container city">
+              <p>General comment</p>
+            </div>
+            </div>
+
   </div>
 </div>
 {/template}
@@ -430,8 +478,6 @@
   <div class="vsaq-item" data-vsaq-container-for="{$id}">
 <div class="questions" question-for={$id}>
     <div class="vsaq-question-title">
-      <button type="button" class="check rejectioncommentbox" id="{$id}-rejectioncommentcheck"></button>
-      <button type="button" class="check findingcommentbox" id="{$id}-findingcommentcheck"></button>
       <label name="text" class="vsaq-label-text" for="{$id}">
         {$captionHtml}
       </label>
@@ -442,9 +488,7 @@
             <input type="checkbox" value="1" class="helpcheck" />
          </label>
     </div>
-            <input id="{$id}-generalcommentid" type="text" class="consultantcomment generalcomment" />
-            <input id="{$id}-rejectioncommentid" type="text" class="consultantcomment rejectioncomment" />
-            <input id="{$id}-findingcommentid" type="text" class="consultantcomment findingcomment" />
+
     <input id="{$id}"
       {if $placeholder}placeholder="{$placeholder}" {/if}
       {if $isRequired}required {/if}
@@ -453,6 +497,34 @@
       {if $type}type="{$type}" {/if}
       class="vsaq-line">
     <p></p>
+
+    <div class="w3-container comment-wrapper">
+    <div class="w3-row">
+    <a onclick="openCommentTab(event);" class="check">
+      <div class="tablink w3-bottombar w3-hover-light-grey w3-padding comment-tab w3-border-green" id="{$id}-generalcommentcheck">General</div>
+    </a>
+      <a onclick="openCommentTab(event);"  class="check">
+        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding reject-tab" id="{$id}-rejectioncommentcheck">Rejection</div>
+      </a>
+      <a onclick="openCommentTab(event);"  class="check">
+        <div class="tablink w3-bottombar w3-hover-light-grey w3-padding override-tab" id="{$id}-findingcommentcheck">Override</div>
+      </a>
+    </div>
+
+    <div id="{$id}-rejectioncommentid" class="w3-container city">
+      <p>Rejection comment</p>
+    </div>
+
+    <div id="{$id}-findingcommentid" class="w3-container city">
+      <p>Override comment</p>
+    </div>
+
+    <div id="{$id}-generalcommentid" class="w3-container city">
+      <p>General comment</p>
+    </div>
+    </div>
+
+
   </div>
 </div>
 {/template}
