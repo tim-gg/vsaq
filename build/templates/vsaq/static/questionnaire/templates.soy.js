@@ -93,7 +93,7 @@ vsaq.questionnaire.templates.editablePrefix = function(opt_data, opt_ignored) {
   var knownPropertyIndexListLen59 = knownPropertyIndexList59.length;
   for (var knownPropertyIndexIndex59 = 0; knownPropertyIndexIndex59 < knownPropertyIndexListLen59; knownPropertyIndexIndex59++) {
     var knownPropertyIndexData59 = knownPropertyIndexList59[knownPropertyIndexIndex59];
-    output += '<tr><td>' + soy.$$escapeHtml(opt_data.knownPropertiesKeys[knownPropertyIndexData59]) + '</td><td>' + ((! opt_data.knownPropertiesValues[knownPropertyIndexData59].metadata && ! opt_data.knownPropertiesValues[knownPropertyIndexData59].defaultValues && opt_data.knownPropertiesValues[knownPropertyIndexData59].value) ? '<span name="' + soy.$$escapeHtmlAttribute(opt_data.knownPropertiesValues[knownPropertyIndexData59].nameInClass) + '" class="vsaq-remove-text"><input type="checkbox" checked="checked" class="vsaq-checkbox"></span>' : vsaq.questionnaire.templates.editablePropertyValue({propertyInformation: opt_data.knownPropertiesValues[knownPropertyIndexData59]})) + '</td></tr>';
+    output += '<tr><td>' + soy.$$escapeHtml(opt_data.knownPropertiesKeys[knownPropertyIndexData59]) + '</td><td>' + ((! opt_data.knownPropertiesValues[knownPropertyIndexData59].metadata && ! opt_data.knownPropertiesValues[knownPropertyIndexData59].defaultValues && opt_data.knownPropertiesValues[knownPropertyIndexData59].value) ? '<span name="' + soy.$$escapeHtmlAttribute(opt_data.knownPropertiesValues[knownPropertyIndexData59].nameInClass) + '" class="vsaq-remove-text"><input type="checkbox" checked="checked" class="vsaq-checkbox question-input"></span>' : vsaq.questionnaire.templates.editablePropertyValue({propertyInformation: opt_data.knownPropertiesValues[knownPropertyIndexData59]})) + '</td></tr>';
   }
   output += '</table></div>';
   return soydata.VERY_UNSAFE.ordainSanitizedHtml(output);
@@ -146,7 +146,7 @@ if (goog.DEBUG) {
  * @suppress {checkTypes|uselessCode}
  */
 vsaq.questionnaire.templates.radio = function(opt_data, opt_ignored) {
-  return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div class="vsaq-item vsaq-radio-item" data-vsaq-container-for="' + soy.$$escapeHtmlAttribute(opt_data.id) + '"><label><input name="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" type="radio" id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="vsaq-radiobutton"> <span name="text" class="vsaq-label-text">' + soy.$$escapeHtml(opt_data.captionHtml) + '</span></label></div>');
+  return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div class="vsaq-item vsaq-radio-item" data-vsaq-container-for="' + soy.$$escapeHtmlAttribute(opt_data.id) + '"><label><input name="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" type="radio" id="' + soy.$$escapeHtmlAttribute(opt_data.id) + '" class="vsaq-radiobutton question-input"> <span name="text" class="vsaq-label-text">' + soy.$$escapeHtml(opt_data.captionHtml) + '</span></label></div>');
 };
 if (goog.DEBUG) {
   vsaq.questionnaire.templates.radio.soyTemplateName = 'vsaq.questionnaire.templates.radio';
@@ -307,7 +307,7 @@ vsaq.questionnaire.templates.todoList = function(opt_data, opt_ignored) {
     var todoListLen340 = todoList340.length;
     for (var todoIndex340 = 0; todoIndex340 < todoListLen340; todoIndex340++) {
       var todoData340 = todoList340[todoIndex340];
-      output += '<li><label><input type=\'checkbox\' name=\'' + soy.$$escapeHtmlAttribute(todoData340.key) + '\' class=\'eh-todo-item\'' + ((opt_data.todoStatus[todoData340.key] == 'checked') ? 'checked ' : '') + 'id=\'' + soy.$$escapeHtmlAttribute(todoData340.key) + '\' value=\'checked\'><span>' + soy.$$escapeHtml(todoData340.description) + '</span></label></li>';
+      output += '<li><label><input type=\'checkbox\' name=\'' + soy.$$escapeHtmlAttribute(todoData340.key) + '\' class=\'eh-todo-item question-input\'' + ((opt_data.todoStatus[todoData340.key] == 'checked') ? 'checked ' : '') + 'id=\'' + soy.$$escapeHtmlAttribute(todoData340.key) + '\' value=\'checked\'><span>' + soy.$$escapeHtml(todoData340.description) + '</span></label></li>';
     }
     output += '</ul>';
   } else {
