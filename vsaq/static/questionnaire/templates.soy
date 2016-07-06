@@ -112,7 +112,7 @@
                 not $knownPropertiesValues[$knownPropertyIndex].defaultValues and
                 $knownPropertiesValues[$knownPropertyIndex].value}
               <span name="{$knownPropertiesValues[$knownPropertyIndex].nameInClass}" class="vsaq-remove-text">
-                <input type="checkbox" checked="checked" class="vsaq-checkbox">
+                <input type="checkbox" checked="checked" class="vsaq-checkbox question-input">
 
               </span>
             {else}
@@ -187,7 +187,7 @@
 {template .radio}
   <div class="vsaq-item vsaq-radio-item" data-vsaq-container-for="{$id}">
     <label>
-      <input name="{$id}" type="radio" id="{$id}" class="vsaq-radiobutton">{sp}
+      <input name="{$id}" type="radio" id="{$id}" class="vsaq-radiobutton question-input">{sp}
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </label>
   </div>
@@ -577,7 +577,7 @@
 
       {foreach $todo in $todoListItems}
         <li><label><input type='checkbox' name='{$todo.key}'
-                          class='eh-todo-item'
+                          class='eh-todo-item question-input'
                           {if $todoStatus[$todo.key] == 'checked'}checked {/if}
                           id='{$todo.key}'
                           value='checked'>
