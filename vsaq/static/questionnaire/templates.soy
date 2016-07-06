@@ -216,12 +216,12 @@
     </div>
 
     <input name="{$id}" id="{$id}/yes" type="radio" value="yes"
-      class="vsaq-radiobutton">{sp}
+      class="vsaq-radiobutton question-input">{sp}
     <span name="yes" class="vsaq-label-text">{$yesHtml}</span>
   </label>
   <label>
     <input name="{$id}" id="{$id}/no" type="radio" value="no"
-      class="vsaq-radiobutton">{sp}
+      class="vsaq-radiobutton question-input">{sp}
     <span name="no" class="vsaq-label-text">{$noHtml}</span>
   </label>
 
@@ -353,7 +353,7 @@
   <div class="vsaq-item vsaq-checkbox-item" data-vsaq-container-for="{$id}">
     <label>
 
-      <input type="checkbox" name="{$id}" id="{$id}" class="vsaq-checkbox">{sp}
+      <input type="checkbox" name="{$id}" id="{$id}" class="vsaq-checkbox question-input">{sp}
 
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </label>
@@ -430,7 +430,7 @@
         {if $inputPattern}pattern="{$inputPattern}" {/if}
         {if $inputTitle}title="{$inputTitle}" {/if}
         {if $isRequired}required {/if}
-        class="vsaq-box">
+        class="vsaq-box question-input">
         </textarea>
 
             <div class="w3-container comment-wrapper">
@@ -495,7 +495,7 @@
       {if $inputPattern}pattern="{$inputPattern}" {/if}
       {if $inputTitle}title="{$inputTitle}" {/if}
       {if $type}type="{$type}" {/if}
-      class="vsaq-line">
+      class="vsaq-line question-input">
     <p></p>
 
     <div class="w3-container comment-wrapper">
