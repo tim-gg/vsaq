@@ -112,7 +112,7 @@
                 not $knownPropertiesValues[$knownPropertyIndex].defaultValues and
                 $knownPropertiesValues[$knownPropertyIndex].value}
               <span name="{$knownPropertiesValues[$knownPropertyIndex].nameInClass}" class="vsaq-remove-text">
-                <input type="checkbox" checked="checked" class="vsaq-checkbox">
+                <input type="checkbox" checked="checked" class="vsaq-checkbox question-input">
 
               </span>
             {else}
@@ -187,7 +187,7 @@
 {template .radio}
   <div class="vsaq-item vsaq-radio-item" data-vsaq-container-for="{$id}">
     <label>
-      <input name="{$id}" type="radio" id="{$id}" class="vsaq-radiobutton">{sp}
+      <input name="{$id}" type="radio" id="{$id}" class="vsaq-radiobutton question-input">{sp}
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </label>
   </div>
@@ -216,12 +216,12 @@
     </div>
 
     <input name="{$id}" id="{$id}/yes" type="radio" value="yes"
-      class="vsaq-radiobutton">{sp}
+      class="vsaq-radiobutton question-input">{sp}
     <span name="yes" class="vsaq-label-text">{$yesHtml}</span>
   </label>
   <label>
     <input name="{$id}" id="{$id}/no" type="radio" value="no"
-      class="vsaq-radiobutton">{sp}
+      class="vsaq-radiobutton question-input">{sp}
     <span name="no" class="vsaq-label-text">{$noHtml}</span>
   </label>
 
@@ -343,7 +343,7 @@
   <div class="vsaq-item vsaq-checkbox-item" data-vsaq-container-for="{$id}">
     <label>
 
-      <input type="checkbox" name="{$id}" id="{$id}" class="vsaq-checkbox">{sp}
+      <input type="checkbox" name="{$id}" id="{$id}" class="vsaq-checkbox question-input">{sp}
 
       <span name="text" class="vsaq-label-text">{$captionHtml}</span>
     </label>
@@ -420,7 +420,7 @@
         {if $inputPattern}pattern="{$inputPattern}" {/if}
         {if $inputTitle}title="{$inputTitle}" {/if}
         {if $isRequired}required {/if}
-        class="vsaq-box">
+        class="vsaq-box question-input">
         </textarea>
 
             <div class="w3-container comment-wrapper">
@@ -478,7 +478,7 @@
       {if $inputPattern}pattern="{$inputPattern}" {/if}
       {if $inputTitle}title="{$inputTitle}" {/if}
       {if $type}type="{$type}" {/if}
-      class="vsaq-line">
+      class="vsaq-line question-input">
     <p></p>
 
     <div class="w3-container comment-wrapper">
@@ -555,7 +555,7 @@
 
       {foreach $todo in $todoListItems}
         <li><label><input type='checkbox' name='{$todo.key}'
-                          class='eh-todo-item'
+                          class='eh-todo-item question-input'
                           {if $todoStatus[$todo.key] == 'checked'}checked {/if}
                           id='{$todo.key}'
                           value='checked'>
